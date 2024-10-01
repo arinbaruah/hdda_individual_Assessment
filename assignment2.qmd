@@ -1,0 +1,62 @@
+---
+title: "ETF 5500 Assignment 2"
+author: "Arindom Baruah (32779267)"
+format: pdf
+
+---
+
+
+# Question 1
+
+## Part A
+
+Here, we have a data matrix $Y$ with a dimension of $n \times 3$ which has a mean of 0.
+
+For a vector $Y$ which has been demeaned, the sample covariance matrix $S$ can be obtained through the following computation.
+
+$$S = \dfrac{1}{n-1}(Y^TY)$$ {#eq-covmat}
+
+
+To maintain matrix conformability, the dimension of $S$ will be a __$3 \times 3$__ matrix.
+
+In order to define the covariance matric $S$ as defined by @eq-covmat, we require the following quanities:
+
+1. A data matrix $Y$ with a mean of 0.
+2. The total number of observations $n$ which is given by the number of rows in $Y$.
+
+
+## Part B
+
+An Eigen Value problem is linear in nature and defined by @eq-eigen.
+
+$$SW = \lambda W$$ {#eq-eigen}
+
+Where,
+
+$S = \text{Covariance Matrix}$ \
+$W = \text{Eigen Vector}$ \
+$\lambda = \text{Eigen Value}$ \
+
+As the Eigen Vector is a column vector, hence, to satisfy matrix conformability in @eq-eigen, the dimension of $W$ must be a __$3 \times 1$__ vector.
+
+
+## Part C
+
+We are given the linear combination as stated through @eq-lineareq. 
+
+$$X = \beta Y$$ {#eq-lineareq}
+We know that Y is a $n \times 1$ vector and $\beta$ is stated as a $3 \times 1$ vector. To obtain the Variance-Covariance matrix, we perform the following computations.
+
+$$\text{Var}(X) = \text{Var}(Y\beta)$$
+
+$$\implies \text{Var}(X) =\sum_{i=1}^{n} \dfrac{(Y_i \beta)^2}{n-1}$$
+$$\implies \text{Var}(X) = \beta^T \Bigl[ \sum_{i=1}^{n}\dfrac{(Y_i)^2}  {n-1}\Bigl] \beta$$
+
+For a data matrix $Y_i$ with mean = 0, the term $\sum_{i=1}^{n}\dfrac{(Y_i)^2}  {n-1}$ is considered as the covariance and is denoted by $S$.
+
+$$\boxed{\implies \text{Var}(X) = \beta^T S \beta}$$ {#eq-varcovcompute}
+
+
+@eq-varcovcompute provides us with the final form of the variance-covariance matrix.
+
+We know, the dimension of $\beta^T$ is $1 \times 3$ and that of $beta$ is $3 \times 1$. In order to maintain matrix conformability, the value dimension of the variance covariance matrix $\text{Var}(X)$ will be $1 \times 1$. This suggests that the __resultant matrix is a scalar value.__
