@@ -59,7 +59,7 @@ $$\boxed{\implies \text{Cov}(X) = \beta^T S \beta}$$ {#eq-varcovcompute}
 
 @eq-varcovcompute provides us with the final form of the variance-covariance matrix.
 
-We know, the dimension of $\beta^T$ is $1 \times 3$ and that of $beta$ is $3 \times 1$. In order to maintain matrix conformability, the value dimension of the variance covariance matrix $\text{Var}(X)$ will be $1 \times 1$. This suggests that the __resultant matrix is a scalar value.__
+We know, the dimension of $\beta^T$ is $1 \times 3$ and that of $\beta$ is $3 \times 1$. In order to maintain matrix conformability, the value dimension of the variance covariance matrix $\text{Var}(X)$ will be $1 \times 1$. This suggests that the __resultant matrix is a scalar value.__
 
 
 # Exercise 2
@@ -154,5 +154,91 @@ Where $\lambda_i$ is an eigen value and $v_i$ is an eigen vector corresponding t
 So, based on the above information, we can write @eq-covx as follows.
 
 
-$$\text{Cov}(X) = C^T (\lambda_w WW^T + \lambda_u UU^T)C$$
-All dot products between $W$ and $U$ were reduced to 0.
+$$\text{Cov}(X) = \dfrac{1}{n-1}C^T (\lambda_w WW^T + \lambda_u UU^T)C$$ 
+
+$$\text{Cov}(X) = \dfrac{1}{n-1}\begin{bmatrix} 
+	W^T \\
+	U^T
+	\end{bmatrix}
+	\quad (\lambda_w WW^T + \lambda_u UU^T)\begin{bmatrix} 
+	W^T 
+	U^T
+	\end{bmatrix}$$ {#eq-covmult}
+
+All dot products between $W$ and $U$ reduce to 0 due to the orthogonality condition between the two vectors. 
+
+Additionally, for normalised vectors, $vv^T = 1$. As a result, @eq-covmult reduces to the following. 
+
+$$\text{Cov}(X) = \dfrac{1}{n-1}(\lambda_w W + \lambda_u U) $$ {#eq-covvect}
+
+Converting @eq-covvect to the matrix form, we can write it as follows.
+
+$$\text{Cov}(X) = \dfrac{1}{n-1}\begin{bmatrix} 
+	\lambda_w & 0\\
+	0 & \lambda_u
+	\end{bmatrix}
+ $$ {#eq-covmatfinal}
+ 
+ 
+The final form of the variance-covariance matrix is diagonal, as shown in @eq-covmatfinal. This diagonal structure arises from the orthogonality condition, which ensures that all off-diagonal elements representing covariances are zero.
+
+# Exercise 5
+
+
+Here, we have observations give as follows.
+
+$a = \dfrac{x_1}{\sqrt{\lambda_u}}$ and $b = \dfrac{x_2}{\sqrt{\lambda_u}}$
+
+$Z$ is a datamatrix consisting of the vectors $a$ and $b$.
+
+Now, the sample variance-covariance matrix $\text{Cov (Z)}$ will be calculated as follows.
+
+$$ \text{Cov}(Z) = \dfrac{1}{n-1}Z^TZ$$
+$$ \text{Cov}(Z) = \dfrac{1}{n-1}\begin{bmatrix} 
+	a^Ta & a^Tb\\
+	b^Ta & b^Tb
+	\end{bmatrix}$$ {#eq-covmatz}
+From @covmatfinal, we know that the variances of $x_1$ and $x_2$ are given by their eigen values. Using this result, we obtain the variances of the vectors $a$ and $b$ as follows.
+
+$$\text{Var(a)} = \text{Var}\Bigl(\dfrac{x_1}{\sqrt{\lambda_w}}\Bigl)$$
+Now, implementing the variance scaling rule $\text{Var(cX)} = c^2\text{Var(X)}$ and utilising results from @eq-covmatfinal to the above equation, we get the result as follows.
+
+$$\text{Var(a)} = \dfrac{1}{\lambda_w}\text{Var}(x_1)$$
+
+$$\implies \text{Var(a)} = \dfrac{\lambda_w}{\lambda_w} = 1$$
+
+Similary, we obtain the value of $\text{Var}(b) = 1$.
+
+For a demeaned vector upon normalisation, we know that,
+
+$$\text{Var}(a) = \dfrac{1}{n-1}a^Ta$$
+$$\implies \dfrac{1}{n-1}a^Ta = 1 $$
+$$\implies a^Ta = n-1 $$ {#eq-var}
+Similarly, $b^Tb = n - 1$
+
+Next, we obtain the covariances between $a$ and $b$.
+
+$$\text{Cov}(a,b) = \text{Cov}(\dfrac{x_1}{\lambda_w},\dfrac{x_2}{\lambda_u}) $$
+
+$$\implies \text{Cov}(a,b) = \dfrac{1}{\sqrt{\lambda_w\lambda_u}}\text{Cov}({x_1},x_2) $$
+
+However, we know that our vectors $x_1$ and $x_2$ are the columns in the matrix $X$, representing the two principal components PC1 and PC2. Hence, $x_1$ and $x_2$ are uncorrelated and will have a covariance $\text{Cov}(x_1,x_2) = 0$.
+
+As a result, we obtain the following. 
+$$\text{Cov}(a,b) = a^Tb = b^Ta = 0$$ {#eq-cov}
+
+Replacing the relevant terms in @eq-covmatz by @eq-var and @eq-cov, we obtain the following result.
+
+
+$$\text{Cov}(Z) = \dfrac{1}{n-1} \begin{bmatrix} 
+	n-1 & 0\\
+	0 & n-1
+	\end{bmatrix} $$
+	
+	
+$$\implies \text{Cov}(Z) = \begin{bmatrix} 
+	1 & 0\\
+	0 & 1
+	\end{bmatrix} = \mathbb{I}$$ {#eq-covzidentity}
+
+As observed in @eq-covzidentity, the sample variance-covariance matrix of $Z$ is an identity matrix.
