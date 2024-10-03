@@ -12,9 +12,28 @@ format: pdf
 
 Here, we have a data matrix $Y$ with a dimension of $n \times 3$ which has a mean of 0.
 
-For a vector $Y$ which has been demeaned, the sample covariance matrix $S$ can be obtained through the following computation.
+@eq-var shows the equation of sample variance for a single variable $y$.
 
-$$S = \dfrac{1}{n-1}(Y^TY)$$ {#eq-covmat}
+$$\text{Var}(y) =  \dfrac{1}{n-1} \sum_{j=1}^{n}(y_{i,j} - \bar{y_i}) $$ {#eq-var}
+
+Where, \
+$y$ are the observations \
+$\bar{y}$ is the mean of the observations \
+$n$ are the number of observations 
+
+While @eq-var provides us with a singular value for a single variable, we would like to extend this idea for high dimensions in a matrix form. This matrix is called the variance-covariance matrix where every element in the diagonal provides us with the variance of the variable while every off-diagonal element provides us with the covariance of the variable with respect to another variable. This is given by @eq-varmat.
+
+$$\text{Cov}(Y) =  \dfrac{1}{n-1}((Y-\bar{Y})^T(Y-\bar{Y}) $$ {#eq-varmat}
+
+Where, \
+
+$Y$ is the data matrix, \
+$\bar{Y}$ is the matrix containing the mean of each variable, \
+$n$ is the number of observations in the data.
+
+For a vector $Y$ that has been demeaned ($\bar{Y} = 0$), the sample variance-covariance matrix $S$ can be obtained through the following computation.
+
+$$S = \text{Cov}(Y) =\dfrac{1}{n-1}(Y^TY)$$ {#eq-covmat}
 
 
 To maintain matrix conformability, the dimension of $S$ will be a __$3 \times 3$__ matrix.
@@ -67,15 +86,18 @@ We know, the dimension of $\beta^T$ is $1 \times 3$ and that of $\beta$ is $3 \t
 The dimensions of the matrices of interest are as follows:
 
 $W$ is a $3 \times 1$ matrix \
-$Y$ is a $n \times 1$ matrix \
+$Y$ is a $n \times 3$ matrix \
 $S$ is a $3 \times 3$ matrix \
 
+In order to assess matrix multiplication conformability, __the number of columns in the first matrix should be equal to the number of rows in the second matrix.__
 
 ## Part A
 
-$W^TY$ matrix will be conformable __if the matrix $Y$ has a $n = 3$ observations.__
+The matrix $Y$ is a general matrix with $n \times 3$ dimension. The only condition when the product $W^TY$ will be conformable is for a specific condition, $n = 3$. However, a data matrix with only 3 dimensions and only 3 observations is highly unlikely.
 
-The dimension of this matrix will be $1 \times 3$ .
+As a result, this product is expected to be __non-conformable.__
+
+Under the special condition when $n = 3$, the dimension of $W^TY$ matrix will be $1 \times 3$.
 
 ## Part B
 
