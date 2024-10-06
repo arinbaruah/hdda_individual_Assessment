@@ -19,11 +19,11 @@ $$\text{Var}(y) =  \dfrac{1}{n-1} \sum_{j=1}^{n}(y_{i,j} - \bar{y_i}) $$ {#eq-va
 Where, \
 $y$ are the observations \
 $\bar{y}$ is the mean of the observations \
-$n$ are the number of observations 
+$n$ is the number of observations 
 
 While @eq-var provides us with a singular value for a single variable, we would like to extend this idea for high dimensions in a matrix form. This matrix is called the variance-covariance matrix where every element in the diagonal provides us with the variance of the variable while every off-diagonal element provides us with the covariance of the variable with respect to another variable. This is given by @eq-varmat.
 
-$$\text{Cov}(Y) =  \dfrac{1}{n-1}((Y-\bar{Y})^T(Y-\bar{Y}) $$ {#eq-varmat}
+$$\text{Cov}(Y) =  \dfrac{1}{n-1}((Y-\bar{Y})'(Y-\bar{Y}) $$ {#eq-varmat}
 
 Where, \
 
@@ -48,15 +48,15 @@ In order to define the covariance matric $S$ as defined by @eq-covmat, we requir
 
 An Eigen Value problem is linear in nature and defined by @eq-eigen.
 
-$$SW = \lambda W$$ {#eq-eigen}
+$$Sw = \lambda w$$ {#eq-eigen}
 
 Where,
 
 $S = \text{Covariance Matrix}$ \
-$W = \text{Eigen Vector}$ \
+$w = \text{Eigen Vector}$ \
 $\lambda = \text{Eigen Value}$ \
 
-As the Eigen Vector is a column vector, hence, to satisfy matrix conformability in @eq-eigen, the dimension of $W$ must be a __$3 \times 1$__ vector.
+As the Eigen Vector is a column vector, hence, to satisfy matrix conformability in @eq-eigen, the dimension of $w$ must be a __$3 \times 1$__ vector.
 
 
 ## Part C
@@ -66,14 +66,14 @@ We are given the linear combination as stated through @eq-lineareq.
 $$X = \beta Y$$ {#eq-lineareq}
 We know that Y is a $n \times 1$ vector and $\beta$ is stated as a $3 \times 1$ vector. To obtain the Variance-Covariance matrix, we perform the following computations.
 
-$$\text{Cov}(X) = \dfrac{1}{n-1}X^TX$$
+$$\text{Cov}(X) = \dfrac{1}{n-1}X'X$$
 
 $$\implies \text{Cov}(X) =\sum_{i=1}^{n} \dfrac{(Y_i \beta)^2}{n-1}$$
-$$\implies \text{Cov}(X) = \beta^T \Bigl[ \sum_{i=1}^{n}\dfrac{(Y_i)^2}  {n-1}\Bigl] \beta$$
+$$\implies \text{Cov}(X) = \beta' \Bigl[ \sum_{i=1}^{n}\dfrac{(Y_i)^2}  {n-1}\Bigl] \beta$$
 
 For a data matrix $Y_i$ with mean = 0, the term $\sum_{i=1}^{n}\dfrac{(Y_i)^2}  {n-1}$ is considered as the covariance and is denoted by $S$.
 
-$$\boxed{\implies \text{Cov}(X) = \beta^T S \beta}$$ {#eq-varcovcompute}
+$$\boxed{\implies \text{Cov}(X) = \beta' S \beta}$$ {#eq-varcovcompute}
 
 
 @eq-varcovcompute provides us with the final form of the variance-covariance matrix.
@@ -85,52 +85,52 @@ We know, the dimension of $\beta^T$ is $1 \times 3$ and that of $\beta$ is $3 \t
 
 The dimensions of the matrices of interest are as follows:
 
-$W$ is a $3 \times 1$ matrix \
+$w$ is a $3 \times 1$ matrix \
 $Y$ is a $n \times 3$ matrix \
 $S$ is a $3 \times 3$ matrix \
+$v$ is an arbitrary column vector with a dimension $n \times 1$
 
 In order to assess matrix multiplication conformability, __the number of columns in the first matrix should be equal to the number of rows in the second matrix.__
 
 ## Part A
 
-The matrix $Y$ is a general matrix with $n \times 3$ dimension. The only condition when the product $W^TY$ will be conformable is for a specific condition, $n = 3$. However, a data matrix with only 3 dimensions and only 3 observations is highly unlikely.
+The matrix $Y$ is a general matrix with $n \times 3$ dimension. The only condition when the product $w'Y$ will be conformable is for a specific condition, $n = 3$. However, a data matrix with only 3 dimensions and only 3 observations is highly unlikely.
 
 As a result, this product is expected to be __non-conformable.__
 
-Under the special condition when $n = 3$, the dimension of $W^TY$ matrix will be $1 \times 3$.
+Under the special condition when $n = 3$, the dimension of $w'Y$ matrix will be $1 \times 3$.
 
 ## Part B
 
-$WW^T$ will be a conformable matrix with dimension $3 \times 3$.
+$ww'$ will be a conformable matrix with dimension $3 \times 3$.
 
 ## Part C
 
-$WV^T$ will be a conformable matrix with dimension $3 \times 3$.
+$wv'$ will be a __non-conformable matrix__ since $v$ is an arbitrary column vector with no fixed dimension.
 
 ## Part D
 
-$S^TY$ matrix will be conformable __if the matrix $Y$ has a $n = 3$ observations.__
+$S'Y$ matrix will be a __non-conformable matrix__ since $Y$ is an arbitrary column vector with no fixed dimension.
 
-The dimension of this new matrix will be $3 \times 3$.
 
 ## Part E
 
-$YW + V^T$ is __not a conformable matrix__ as the number of columns for matrix $Y$ and the number of rows for matrix $W$ are not identical.
+$Yw + v'$ is __not a conformable matrix__ as the number of columns for matrix $Y$ and the number of rows for matrix $W$ are not identical.
 
 
 # Exercise 3
 
-We are given with the equation $X = YC^T$
+We are given with the equation $X = YC'$
 
 Where $$
 	C = \begin{bmatrix} 
-	W^T \\
-	U^T
+	w' \\
+	u'
 	\end{bmatrix}
 	\quad
 	$$ and is a $2 \times 3$ dimensional matrix.
 
-$W$ is the eigen vector of $S$ corresponding to the largest eigen value while $U$ is the eigen vector of $S$ corresponding to the second-largest eigen value.
+$w$ is the eigen vector of $S$ corresponding to the largest eigen value while $u$ is the eigen vector of $S$ corresponding to the second-largest eigen value.
 
 Performing a matrix multiplication to obtain $X$ gives us a $n \times 2$ matrix where $n$ is the number of observations.
 
@@ -143,55 +143,55 @@ The matrix multiplication performs a linear combination such that the data conta
 
 We know, the variance-covariance matrix is calculated as follows:
 
-$$\text{Cov}(X) = \dfrac{(X^TX)}{n-1}$$
-$$\implies \text{Cov}(X) =\sum_{i=1}^{n} \dfrac{(YC^T)^2}{n-1}$$
+$$\text{Cov}(X) = \dfrac{(X'X)}{n-1}$$
+$$\implies \text{Cov}(X) =\sum_{i=1}^{n} \dfrac{(YC')^2}{n-1}$$
 
-$$\implies \text{Cov}(X) = C^T \Bigl[ \sum_{i=1}^{n}\dfrac{(Y_i)^2}  {n-1}\Bigl] C$$
+$$\implies \text{Cov}(X) = C' \Bigl[ \sum_{i=1}^{n}\dfrac{(Y_i)^2}  {n-1}\Bigl] C$$
 
 As previously defined in @eq-covmat, we can use the matrix $S$ in the above equation as follows.
 
-$$\boxed{\implies \text{Cov}(X) = C^T S C}$$ {#eq-covx}
+$$\boxed{\implies \text{Cov}(X) = C' S C}$$ {#eq-covx}
 
 @eq-covx is the expression of the sample variance-covariance matrix $\text{Cov}(X)$ in terms of $C$ and $S$.
 
 
 # Exercise 4
 
-Vectors $W$ and $U$ are said to be orthogonal when they are at complete right angles to each other. This means that performing a matrix dot product, $W \cdot U$ will __yield a result of 0.__
+Vectors $w$ and $u$ are said to be orthogonal when they are at complete right angles to each other. This means that performing a matrix dot product, $w \cdot u$ will __yield a result of 0.__
 
-In the context of PCA, vectors $W$ and $U$ (also called principal components) are __uncorrelated__ and capture unique signals in the data.
+In the context of PCA, vectors $w$ and $u$ (also called principal components) are __uncorrelated__ and capture unique signals in the data.
 
 ## Proof that Cov(X) is a diagonal matrix
 
-From @eq-covx, we know that $\text{Cov}(X) = C^T S C$.
+From @eq-covx, we know that $\text{Cov}(X) = C' S C$.
 
-Additionally, $W$ and $U$ are orthogonal.
+Additionally, $w$ and $u$ are orthogonal.
 
 Based on the spectral theorem, we can write the variance-covariance matrix $S$ as follows.
 
-$$S = \Sigma\lambda_iv_iv_i^T$$
+$$S = \Sigma\lambda_iv_iv_i'$$
 
 Where $\lambda_i$ is an eigen value and $v_i$ is an eigen vector corresponding to the eigen value.
 
 So, based on the above information, we can write @eq-covx as follows.
 
 
-$$\text{Cov}(X) = \dfrac{1}{n-1}C^T (\lambda_w WW^T + \lambda_u UU^T)C$$ 
+$$\text{Cov}(X) = \dfrac{1}{n-1}C^T (\lambda_w ww' + \lambda_u uu')C$$ 
 
 $$\text{Cov}(X) = \dfrac{1}{n-1}\begin{bmatrix} 
-	W^T \\
-	U^T
+	w' \\
+	u'
 	\end{bmatrix}
-	\quad (\lambda_w WW^T + \lambda_u UU^T)\begin{bmatrix} 
-	W^T 
-	U^T
+	\quad (\lambda_w ww' + \lambda_u uu')\begin{bmatrix} 
+	w' 
+	u'
 	\end{bmatrix}$$ {#eq-covmult}
 
-All dot products between $W$ and $U$ reduce to 0 due to the orthogonality condition between the two vectors. 
+All dot products between $w$ and $u$ reduce to 0 due to the orthogonality condition between the two vectors. 
 
-Additionally, for normalised vectors, $vv^T = 1$. As a result, @eq-covmult reduces to the following. 
+Additionally, for normalised vectors, $vv' = 1$. As a result, @eq-covmult reduces to the following. 
 
-$$\text{Cov}(X) = \dfrac{1}{n-1}(\lambda_w W + \lambda_u U) $$ {#eq-covvect}
+$$\text{Cov}(X) = \dfrac{1}{n-1}(\lambda_w w + \lambda_u u) $$ {#eq-covvect}
 
 Converting @eq-covvect to the matrix form, we can write it as follows.
 
@@ -215,10 +215,10 @@ $Z$ is a datamatrix consisting of the vectors $a$ and $b$.
 
 Now, the sample variance-covariance matrix $\text{Cov (Z)}$ will be calculated as follows.
 
-$$ \text{Cov}(Z) = \dfrac{1}{n-1}Z^TZ$$
+$$ \text{Cov}(Z) = \dfrac{1}{n-1}Z'Z$$
 $$ \text{Cov}(Z) = \dfrac{1}{n-1}\begin{bmatrix} 
-	a^Ta & a^Tb\\
-	b^Ta & b^Tb
+	a'a & a'b\\
+	b'a & b'b
 	\end{bmatrix}$$ {#eq-covmatz}
 From @covmatfinal, we know that the variances of $x_1$ and $x_2$ are given by their eigen values. Using this result, we obtain the variances of the vectors $a$ and $b$ as follows.
 
@@ -233,8 +233,8 @@ Similary, we obtain the value of $\text{Var}(b) = 1$.
 
 For a demeaned vector upon normalisation, we know that,
 
-$$\text{Var}(a) = \dfrac{1}{n-1}a^Ta$$
-$$\implies \dfrac{1}{n-1}a^Ta = 1 $$
+$$\text{Var}(a) = \dfrac{1}{n-1}a'a$$
+$$\implies \dfrac{1}{n-1}a'a = 1 $$
 $$\implies a^Ta = n-1 $$ {#eq-var}
 Similarly, $b^Tb = n - 1$
 
@@ -247,7 +247,7 @@ $$\implies \text{Cov}(a,b) = \dfrac{1}{\sqrt{\lambda_w\lambda_u}}\text{Cov}({x_1
 However, we know that our vectors $x_1$ and $x_2$ are the columns in the matrix $X$, representing the two principal components PC1 and PC2. Hence, $x_1$ and $x_2$ are uncorrelated and will have a covariance $\text{Cov}(x_1,x_2) = 0$.
 
 As a result, we obtain the following. 
-$$\text{Cov}(a,b) = a^Tb = b^Ta = 0$$ {#eq-cov}
+$$\text{Cov}(a,b) = a'b = b'a = 0$$ {#eq-cov}
 
 Replacing the relevant terms in @eq-covmatz by @eq-var and @eq-cov, we obtain the following result.
 
