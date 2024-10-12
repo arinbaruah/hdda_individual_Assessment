@@ -12,16 +12,16 @@ format: pdf
 
 Here, we have a data matrix $Y$ with a dimension of $n \times 3$ which has a mean of 0.
 
-@eq-var shows the equation of sample variance for a single variable $y$.
+@eq-variance shows the equation of sample variance for a single variable $y$.
 
-$$\text{Var}(y) =  \dfrac{1}{n-1} \sum_{j=1}^{n}(y_{i,j} - \bar{y_i}) $$ {#eq-var}
+$$\text{Var}(y) =  \dfrac{1}{n-1} \sum_{j=1}^{n}(y_{i,j} - \bar{y_i})^2 $$ {#eq-variance}
 
 Where, \
 $y$ are the observations \
 $\bar{y}$ is the mean of the observations \
 $n$ is the number of observations 
 
-While @eq-var provides us with a singular value for a single variable, we would like to extend this idea for high dimensions in a matrix form. This matrix is called the variance-covariance matrix where every element in the diagonal provides us with the variance of the variable while every off-diagonal element provides us with the covariance of the variable with respect to another variable. This is given by @eq-varmat.
+While @eq-variance provides us with a singular value for a single variable, we would like to extend this idea for high dimensions in a matrix form. This matrix is called the variance-covariance matrix where every element in the diagonal provides us with the variance of the variable while every off-diagonal element provides us with the covariance of the variable with respect to another variable. This is given by @eq-varmat.
 
 $$\text{Cov}(Y) =  \dfrac{1}{n-1}((Y-\bar{Y})'(Y-\bar{Y}) $$ {#eq-varmat}
 
@@ -63,7 +63,7 @@ As the Eigen Vector is a column vector, hence, to satisfy matrix conformability 
 
 We are given the linear combination as stated through @eq-lineareq. 
 
-$$X = \beta Y$$ {#eq-lineareq}
+$$X =  Y\beta$$ {#eq-lineareq}
 We know that Y is a $n \times 1$ vector and $\beta$ is stated as a $3 \times 1$ vector. To obtain the Variance-Covariance matrix, we perform the following computations.
 
 $$\text{Cov}(X) = \dfrac{1}{n-1}X'X$$
@@ -78,7 +78,7 @@ $$\boxed{\implies \text{Cov}(X) = \beta' S \beta}$$ {#eq-varcovcompute}
 
 @eq-varcovcompute provides us with the final form of the variance-covariance matrix.
 
-We know, the dimension of $\beta^T$ is $1 \times 3$ and that of $\beta$ is $3 \times 1$. In order to maintain matrix conformability, the value dimension of the variance covariance matrix $\text{Var}(X)$ will be $1 \times 1$. This suggests that the __resultant matrix is a scalar value.__
+We know, the dimension of $\beta'$ is $1 \times 3$ and that of $\beta$ is $3 \times 1$. In order to maintain matrix conformability, the value dimension of the variance covariance matrix $\text{Var}(X)$ will be $1 \times 1$. This suggests that the __resultant matrix is a scalar value.__
 
 
 # Exercise 2
@@ -88,7 +88,7 @@ The dimensions of the matrices of interest are as follows:
 $w$ is a $3 \times 1$ matrix \
 $Y$ is a $n \times 3$ matrix \
 $S$ is a $3 \times 3$ matrix \
-$v$ is an arbitrary column vector with a dimension $n \times 1$
+$v$ is an arbitrary column vector with a dimension $3 \times 1$
 
 In order to assess matrix multiplication conformability, __the number of columns in the first matrix should be equal to the number of rows in the second matrix.__
 
@@ -106,7 +106,7 @@ $ww'$ will be a conformable matrix with dimension $3 \times 3$.
 
 ## Part C
 
-$wv'$ will be a __non-conformable matrix__ since $v$ is an arbitrary column vector with no fixed dimension.
+$wv'$ will be a __conformable matrix__ with a dimension $ 3 \times 3$.
 
 ## Part D
 
@@ -115,7 +115,7 @@ $S'Y$ matrix will be a __non-conformable matrix__ since $Y$ is an arbitrary colu
 
 ## Part E
 
-$Yw + v'$ is __not a conformable matrix__ as the number of columns for matrix $Y$ and the number of rows for matrix $W$ are not identical.
+$Yw + v'$ is __not a conformable matrix__ as the number of columns for matrix $Y$ and the number of rows for matrix $W$ are not identical. While adding the matrices, the dimensions of the two matrices must exactly match. This is however not the case here.
 
 
 # Exercise 3
@@ -183,7 +183,7 @@ $$\text{Cov}(X) = \dfrac{1}{n-1}\begin{bmatrix}
 	u'
 	\end{bmatrix}
 	\quad (\lambda_w ww' + \lambda_u uu')\begin{bmatrix} 
-	w' 
+	w'
 	u'
 	\end{bmatrix}$$ {#eq-covmult}
 
@@ -213,7 +213,12 @@ Here, we have observations give as follows.
 
 $a = \dfrac{x_1}{\sqrt{\lambda_u}}$ and $b = \dfrac{x_2}{\sqrt{\lambda_u}}$
 
-$Z$ is a datamatrix consisting of the vectors $a$ and $b$.
+$Z$ is a datamatrix consisting of the vectors $a$ and $b$ as shown below. 
+
+$$Z = \begin{bmatrix} 
+	a & b
+	\end{bmatrix}
+ $$ 
 
 Now, the sample variance-covariance matrix $\text{Cov (Z)}$ will be calculated as follows.
 
@@ -235,7 +240,7 @@ Similary, we obtain the value of $\text{Var}(b) = 1$.
 
 For a demeaned vector upon normalisation, we know that,
 
-$$\text{Var}(a) = \dfrac{1}{n-1}a'a$$
+$$\text{Var(a)} = \dfrac{1}{n-1}a'a$$
 $$\implies \dfrac{1}{n-1}a'a = 1 $$
 $$\implies a^Ta = n-1 $$ {#eq-var}
 Similarly, $b^Tb = n - 1$
