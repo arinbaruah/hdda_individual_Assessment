@@ -202,7 +202,9 @@ $$\text{Cov}(X) = \dfrac{1}{n-1}\begin{bmatrix}
  $$ {#eq-covmatfinal}
  
  
-The final form of the variance-covariance matrix is diagonal, as shown in @eq-covmatfinal. This diagonal structure arises from the orthogonality condition, which ensures that all off-diagonal elements representing covariances are zero.
+The final form of the variance-covariance matrix is diagonal, as shown in @eq-covmatfinal . The diagonal elements contain the eigen values $\lambda_u$ and $\lambda_w$ corresponding to the eigen vectors $u$ and $w$ from the sample covariance matrix $S$.
+
+This diagonal structure arises from the orthogonality condition, which ensures that all off-diagonal elements representing covariances are zero.
 
 # Exercise 5
 
